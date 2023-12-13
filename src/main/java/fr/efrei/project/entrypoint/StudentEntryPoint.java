@@ -1,5 +1,7 @@
-package fr.efrei.project;
+package fr.efrei.project.entrypoint;
 
+import fr.efrei.project.service.StudentService;
+import fr.efrei.project.domain.entity.Student;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +20,7 @@ public class StudentEntryPoint {
         }
 
         @GetMapping("/{id}")
-        public Student getStudent(@PathVariable Long id) {
+        public Student getStudent(@PathVariable Integer id) {
             return studentService.getStudent(id);
         }
 
@@ -27,8 +29,13 @@ public class StudentEntryPoint {
             return studentService.saveStudent(student);
         }
 
+        @PutMapping("/{id}")
+        public Student updateStudent(@PathVariable Integer id, @RequestBody Student student) {
+            return studentService.updateStudent(id, student);
+        }
+
         @DeleteMapping("/{id}")
-        public void deleteStudent(@PathVariable Long id) {
+        public void deleteStudent(@PathVariable Integer id) {
             studentService.deleteStudent(id);
         }
 }
